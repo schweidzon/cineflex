@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import MoviesContainer from "./components/MoviesContainer";
 import GlobalStyle from "./style/globalStyle";
 import MoviesSchedule from "./components/MovieSchedule"
-import MovieSeats from "./components/MovieSeats";
+import MovieSeatsPage from "./components/MovieSeatsPage";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Header />
       {/* <MoviesContainer /> */}
       {/* <MoviesSchedule/> */}
-      <MovieSeats></MovieSeats>
+      <MovieSeatsPage></MovieSeatsPage>
     </>
 
   );

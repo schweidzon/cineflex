@@ -44,6 +44,12 @@ table {
 	border-spacing: 0;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 `
 
 export default GlobalStyle

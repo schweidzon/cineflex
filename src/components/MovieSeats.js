@@ -1,48 +1,36 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 
-export default function MovieSeats() {
 
-    const [seats, setSeats] = useState([])
-    const [selectedSeats, setSelectedSeats] = useState([])
+export default function MovieSeats({seats, selectedSeats, selectSeat}) {
+  
 
-    useEffect(() => {
-        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/showtimes/1/seats")
-        promise.then(resp => setSeats(resp.data.seats))
-    }, [])
-
-    function selectSeat(seat) {
-        const selectSeats = [...selectedSeats, seat]
-        console.log(selectSeats)
-        setSelectedSeats(selectSeats)
-
-    }
-   
-    return (
-        <FilmSeats>
-            {seats.map((film) =>
-                <Seat selectedSeats={selectedSeats.includes(film.id)} isAvailable={film.isAvailable} onClick={() => selectSeat(film.id)}>
-                    {film.id}
-                </Seat>)}
-        </FilmSeats>
+    return ( 
+        <>
+          {seats.map((film) =>
+                    <Seat selectedSeats={selectedSeats.includes(film.id)} isAvailable={film.isAvailable} onClick={() => selectSeat(film)}>
+                        {film.id}
+                    </Seat>)}
+                <SeatsStatus>
+                    <SeatStatus color={"selecionado"}>
+                        <div></div>
+                        <p>Selecionado</p>
+                    </SeatStatus>
+                    <SeatStatus color={"disponivel"}>
+                        <div></div>
+                        <p>Disponível</p>
+                    </SeatStatus>
+                    <SeatStatus color={"indiposivel"}>
+                        <div></div>
+                        <p>Indisponível</p>
+                    </SeatStatus>
+                </SeatsStatus>
+        </>
     )
 }
 
 
-const FilmSeats = styled.div `
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 10px;
-flex-wrap: wrap;
-width: 375px;
-margin: auto;
-   
-
-`
-
-const Seat = styled.button `
+const Seat = styled.button`
         border: 1px solid #808F9D;
         border-radius: 12px;
         font-family: 'Roboto';
@@ -55,6 +43,54 @@ const Seat = styled.button `
         justify-content: center;
         align-items: center;
         margin-top: 25px;
-        background-color: ${props => !props.isAvailable ?  "#FBE192" : props.selectedSeats ? "#1AAE9E" : "#C3CFD9"};
+        background-color: ${props => !props.isAvailable ? "#FBE192" : props.selectedSeats ? "#1AAE9E" : "#C3CFD9"};
         cursor: pointer;
+`
+
+const SeatsStatus = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    text-align: center;
+    width: 375px;
+    margin: auto;
+        div{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+          
+        }
+    
+        
+`
+
+const SeatStatus = styled.div`
+    margin-top: 20px;
+    div {
+        width: 26px;
+        height: 26px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        background-color: ${props => {
+        if (props.color === "disponivel") {
+            return "#C3CFD9"
+        } else if (props.color === "selecionado") {
+            return "#1AAE9E"
+        } else {
+            return "#FBE192"
+        }
+    }};
+        border: ${props => {
+        if (props.color === "disponivel") {
+            return "1px solid #7B8B99"
+        } else if (props.color === "selecionado") {
+            return "1px solid #0E7D71"
+        } else {
+            return "1px solid #F7C52B"
+        }
+    }};        
+    }
 `
