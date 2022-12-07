@@ -1,14 +1,22 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import Footer from "./Footer"
 
-export default function MovieSchedule() {
+export default function MovieSchedule({selectedTime, SetSelectedTime, film}) {
+    console.log(film)
     const [schedule, setSchedule] = useState([])
     useEffect(() => {
-        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes")
+        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies/3/showtimes")
         promise.then(resp => setSchedule(resp.data.days))
     }, [])
-    console.log(schedule)
+    //console.log(schedule)
+    function selectTime(time) {
+        const times = { day:time.weekday, time:time.date}
+        //console.log(times)
+        SetSelectedTime(times)
+    }
+    
     return (
         <>
             {schedule.map((days) =>
@@ -16,11 +24,12 @@ export default function MovieSchedule() {
                     <h1>{days.weekday} - {days.date}</h1>
                     <MovieTimes>
                         {(days.showtimes).map((time) =>
-                            <button>{time.name}</button>
+                            <button onClick={() => selectTime(days)}>{time.name}</button>
                         )}
                     </MovieTimes>
                 </MovieDays>
             )}
+          
 
         </>
 

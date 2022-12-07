@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
-export default function Movie({ filme }) {
+export default function Movie({ film }) {
 
     return (
         <Film>
-            <img src={filme.posterURL} />
+            <img src={film.posterURL} />
         </Film>
     )
 }

@@ -9,14 +9,19 @@ export default function MoviesContainer() {
         const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
         promise.then(res => setMovies(res.data))
         console.log(movies)
+        
     }, [])
+    console.log(movies)
    
+    if(movies) {
+        return(
+            <MoviePage>
+                {movies.map((film) =>  <Movie film={film} />)}
+            </MoviePage>
+        )
+    }
     
-    return(
-        <MoviePage>
-            {movies.map((filme) =>  <Movie filme={filme} />)}
-        </MoviePage>
-    )
+   
 }
 
 const MoviePage = styled.div`

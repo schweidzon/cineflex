@@ -2,55 +2,64 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import MovieSeats from "./MovieSeats"
+import Footer from "./Footer"
 
-export default function MovieSeatsPage() {
+export default function MovieSeatsPage({ selectedTime, film, setFilm, selectedSeats, setSelectedSeats }) {
 
-    const [seats, setSeats] = useState([])
-    const [selectedSeats, setSelectedSeats] = useState([])
-
-    function selectSeat(film) { 
-      
-        if(!film.isAvailable) {
-            return
+    function selectSeat(film) {
+        console.log(film)
+        if (!film.isAvailable) {
+            alert("Esse assento não está disponível")
         }
 
-        if(selectedSeats.includes(film.id)) {
+        if (selectedSeats.includes(film.name)) {
+            setSelectedSeats(selectedSeats.filter(f => f !== film.name))
             return
+
         }
-        const selectSeats = [...selectedSeats, film.id]
+        const selectSeats = [...selectedSeats, film.name]
         console.log(selectSeats)
         setSelectedSeats(selectSeats)
 
     }
-    
+
 
     useEffect(() => {
-        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/showtimes/1/seats")
-        promise.then(resp => setSeats(resp.data.seats))
+        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/showtimes/40/seats")
+        //promise.then(resp => console.log(resp.data.movie.posterURL))
+        promise.then(resp => setFilm(resp.data))
     }, [])
 
 
+    console.log(film)
 
-    return (
-        <>
-            <FilmSeats>
-              <MovieSeats seats={seats} selectedSeats={selectedSeats} selectSeat={selectSeat} />
-            </FilmSeats>
-            <Inputs>
-                <div>
-                    <p>Nome do comprador:</p>
-                    <input placeholder="Digite seu nome..." />
-                </div>
-                <div>
-                    <p>Nome do comprador:</p>
-                    <input placeholder="Digite seu nome..." />
-                </div>
-            </Inputs>
-            <ReserveSeats>Reservar assento(s)</ReserveSeats>
+    if (film) {
+        return (
+            <>
+                <FilmSeats>
+                    <MovieSeats seats={film.seats} selectedSeats={selectedSeats} selectSeat={selectSeat} />
+                </FilmSeats>
+                <Inputs>
+                    <div>
+                        <p>Nome do comprador:</p>
+                        <input placeholder="Digite seu nome..." />
+                    </div>
+                    <div>
+                        <p>Nome do comprador:</p>
+                        <input placeholder="Digite seu nome..." />
+                    </div>
+                </Inputs>
+                <ReserveSeats>Reservar assento(s)</ReserveSeats>
+               
 
-        </>
+            </>
 
-    )
+        )
+
+    }
+
+
+
 }
 
 
@@ -72,7 +81,7 @@ margin: auto;
 
 
 
-const Inputs = styled.div `
+const Inputs = styled.div`
     width: 375px;
     margin: auto;
     margin-top:50px;

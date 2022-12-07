@@ -3,13 +3,13 @@ import styled from "styled-components"
 
 
 export default function MovieSeats({seats, selectedSeats, selectSeat}) {
-  
-
+   //console.log(seats)
+   if(seats) {
     return ( 
         <>
           {seats.map((film) =>
-                    <Seat selectedSeats={selectedSeats.includes(film.id)} isAvailable={film.isAvailable} onClick={() => selectSeat(film)}>
-                        {film.id}
+                    <Seat selectedSeats={selectedSeats.includes(film.name)} isAvailable={film.isAvailable} onClick={() => selectSeat(film)}>
+                        {film.name}
                     </Seat>)}
                 <SeatsStatus>
                     <SeatStatus color={"selecionado"}>
@@ -27,6 +27,8 @@ export default function MovieSeats({seats, selectedSeats, selectSeat}) {
                 </SeatsStatus>
         </>
     )
+   }
+   
 }
 
 
