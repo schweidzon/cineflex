@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SuccessPage({ setPage, selectedSeats, setSelectedSeats, film }) {
+export default function SuccessPage({selectedSeats, setSelectedSeats, film }) {
    
     return (
         <>
@@ -22,10 +22,7 @@ export default function SuccessPage({ setPage, selectedSeats, setSelectedSeats, 
                 </div>
             </SuccesStyle>
             <Link to="/">
-                <HomeButton onClick={() => {
-                    setPage("/")
-                    setSelectedSeats([])
-                }}>Voltar para home</HomeButton>
+                <HomeButton onClick={() => setSelectedSeats([])}>Voltar para home</HomeButton>
             </Link>
         </>
 

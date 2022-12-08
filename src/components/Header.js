@@ -1,20 +1,23 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Header({page, setPage,setSelectedSeats}) {
+export default function Header({setSelectedSeats}) {
+    const location = useLocation()
+    console.log(location.pathname)
+
     return (
         <>
             <HeaderStyle>
             <Link to="/">
                 <h1 onClick={() => {
-                    setPage("/")
+                   
                     setSelectedSeats([])
                     }}>CINEFLEX</h1>
             </Link>
             </HeaderStyle>
            
             <PageTitle>
-            {page === "/sessoes" ? <h2>Selecione o horário</h2> : page==="/assentos" ? <h2>Selecione o(s) assento(s)</h2> : page==="/" ? <h2>Selecione o filme</h2>  : <h3>Pedido feito com sucesso!</h3>}
+            {(location.pathname).includes("/sessoes") ? <h2>Selecione o horário</h2> : (location.pathname).includes("/assentos") ? <h2>Selecione o(s) assento(s)</h2> : (location.pathname) === "/" ? <h2>Selecione o filme</h2>  : location.pathname ==="/sucesso" && <h3>Pedido feito com sucesso!</h3>}
                
             </PageTitle>
         </>

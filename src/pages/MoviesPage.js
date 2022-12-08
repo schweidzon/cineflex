@@ -3,7 +3,7 @@ import Movie from "../components/Movie";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function MoviesContainer({setPage}) {
+export default function MoviesContainer() {
     const [movies, setMovies] = useState([])
     useEffect(() => {
         const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
@@ -16,7 +16,7 @@ export default function MoviesContainer({setPage}) {
     if(movies) {
         return(
             <MoviePage>
-                {movies.map((movie) =>  <Movie movie={movie} setPage={setPage}/>)}
+                {movies.map((movie) =>  <Movie movie={movie}/>)}
             </MoviePage>
         )
     }

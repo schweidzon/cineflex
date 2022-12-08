@@ -4,7 +4,7 @@ import styled from "styled-components"
 import MovieSeats from "../components/MovieSeats"
 import { Link, useParams } from "react-router-dom"
 
-export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelectedSeats,setPage, film, setFilm }) {
+export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelectedSeats, film, setFilm }) {
 
     const { idSessao } = useParams()
     
@@ -46,7 +46,7 @@ export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelecte
         }
         const obj = { ids: seatsId, name: "Fulano", cpf: "12345678900" }
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj)
-        setPage("/sucesso")
+        
     }
 
 
@@ -73,18 +73,7 @@ export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelecte
                 <StyledLink to={selectedSeats.length > 0 && "/sucesso"}>
                     <ReserveSeats onClick={reserveSeats}>Reservar assento(s)</ReserveSeats>
                 </StyledLink>
-
-
-                <Poster>
-                    <div>
-                        <img src={film.movie.posterURL} />
-                    </div>
-                    <div>
-                        <h1>{film.movie.title}</h1>
-                        <h2>{selectedTime.day} - {selectedTime.time}</h2>
-
-                    </div>
-                </Poster>
+            
 
 
             </>
@@ -173,39 +162,3 @@ const ReserveSeats = styled.button`
     cursor: pointer;
 `
 
-const Poster = styled.div`
-    width: 100%;
-    height: 117px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    background: #DFE6ED;
-    border-top: 1px solid #9EADBA;
-    gap: 10px;
-        div:first-of-type {
-            width: 64px;
-            height: 89px;
-            background: #FFFFFF;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 5px;
-        }
-        img {
-            width: 48px;
-            height: 72px;
-        }
-        h1, h2{
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 26px       
-        }
-        h1 {
-            margin-bottom: 5px;
-        }
-       
-`
