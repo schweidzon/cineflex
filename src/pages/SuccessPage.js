@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SuccessPage({selectedSeats, setSelectedSeats, film }) {
-   
+export default function SuccessPage({ selectedSeats, setSelectedSeats, film }) {
+
     return (
         <>
             <SuccesStyle>

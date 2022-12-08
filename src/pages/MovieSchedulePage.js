@@ -7,49 +7,41 @@ import { Link } from "react-router-dom"
 
 export default function MovieSchedulePage({ SetSelectedTime, filme, setFilme }) {
     const { idFilme } = useParams()
-
     const [schedule, setSchedule] = useState([])
-   
-
-
-
 
     useEffect(() => {
-        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
-        promise.then(resp => setFilme(resp.data))
-        promise.then(resp => setSchedule(resp.data.days))
-        promise.catch((err) => console.log(err.response.data))
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
+            .then(resp => {
+                setSchedule(resp.data.days)
+                setFilme(resp.data)
+            })
+            .catch((err) => console.log(err.response.data))
     }, [])
 
 
-   
-    function selectTime(time, hour) {
-        const times = { day: time.weekday, time: hour }
-       
-        SetSelectedTime(times)
-       
+    if (schedule.length === 0) {
+        return (<div>Carregando...</div>)
     }
-
-    console.log(filme)
-
-
+    function selectTime(time) {
+        const times = { day: time.weekday, time: time.name }
+        SetSelectedTime(times)
+    }
     return (
         <>
             {(schedule).map((days) =>
-                <MovieDays data-test="movie-day">
+                <MovieDays key={days.id} data-test="movie-day">
                     <h1>{days.weekday} - {days.date}</h1>
                     <MovieTimes>
-                        <StyledLink to={`/assentos/${days.showtimes[0].id}`}>
-                            <button data-test="showtime" onClick={() => selectTime(days, "15:00")}>{days.showtimes[0].name}</button>
-                        </StyledLink>
-                        <StyledLink to={`/assentos/${days.showtimes[1].id}`}>
-                            <button data-test="showtime" onClick={() => selectTime(days, "19:00")}>{days.showtimes[1].name}</button>
-                        </StyledLink>
+                        {days.showtimes.map((time) =>
+                            <Link to={`/assentos/${time.id}`}>
+                                <button onClick={() => selectTime(time)}>{time.name}</button>
+                            </Link>
+                        )}
                     </MovieTimes>
                 </MovieDays>
             )
             }
-           
+
 
 
         </>
@@ -91,9 +83,5 @@ const MovieTimes = styled.div`
     
 
     }
-`
-
-const StyledLink = styled(Link)`
-    text-decoration:none;
 `
 

@@ -6,22 +6,26 @@ import { useEffect, useState } from "react";
 export default function MoviesContainer() {
     const [movies, setMovies] = useState([])
     useEffect(() => {
-        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
-        promise.then(res => setMovies(res.data))
-        console.log(movies)
-        
+        axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
+        .then(res => setMovies(res.data))
+        .catch(err => console.log(err.response.data))
+
     }, [])
     console.log(movies)
-   
-    if(movies) {
-        return(
+
+    if (movies.lenth === 0) {
+        return (<div>Carregando...</div>)
+    }
+
+    if (movies) {
+        return (
             <MoviePage>
-                {movies.map((movie) =>  <Movie movie={movie}/>)}
+                {movies.map((movie) => <Movie movie={movie} key={movie.id}/>)}
             </MoviePage>
         )
     }
-    
-   
+
+
 }
 
 const MoviePage = styled.div`

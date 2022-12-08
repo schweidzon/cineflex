@@ -9,7 +9,12 @@ export default function Header({ setSelectedSeats }) {
     return (
         <>
             <HeaderStyle>
-                <img data-test="go-home-header-btn" onClick={() => nav(-1)} src={arrow}/>
+                {location.pathname !== "/" &&  <img data-test="go-home-header-btn" 
+                onClick={() => {
+                    nav(-1)
+                    setSelectedSeats([])
+                } } src={arrow} alt="go-back-button"/>}
+               
                 <Link to="/">
                     <h1 onClick={() => setSelectedSeats([])}>CINEFLEX</h1>
                 </Link>

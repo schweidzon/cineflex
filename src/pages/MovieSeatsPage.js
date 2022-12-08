@@ -4,7 +4,7 @@ import styled from "styled-components"
 import MovieSeats from "../components/MovieSeats"
 import { Link, useParams } from "react-router-dom"
 
-export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelectedSeats, film, setFilm }) {
+export default function MovieSeatsPage({selectedSeats, setSelectedSeats, film, setFilm }) {
 
     const { idSessao } = useParams()
     
@@ -12,11 +12,13 @@ export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelecte
     
 
     useEffect(() => {
-        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
-        //promise.then(resp => console.log(resp.data.movie.posterURL))
-        promise.then(resp => setFilm(resp.data))
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)        
+        .then(resp => setFilm(resp.data))
+        .catch((err) => console.log(err.response.data))
     }, [])
 
+   
+ 
     function selectSeat(film) {
         console.log(film)
         if (!film.isAvailable) {
@@ -47,6 +49,10 @@ export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelecte
         const obj = { ids: seatsId, name: "Fulano", cpf: "12345678900" }
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj)
         
+    }
+
+    if(!film) {
+        return (<div>Carregando...</div>)
     }
 
 

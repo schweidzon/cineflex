@@ -13,26 +13,21 @@ function App() {
   const [selectedSeats, setSelectedSeats] = useState([])
   const [buyerInfo, setBuyerInfo] = useState([])
   const [filme, setFilme] = useState([])
-
   const [film, setFilm] = useState(undefined)
-
-
-
-
 
   return (
 
     <BrowserRouter>
       <GlobalStyle />
-      <Header  setSelectedSeats={setSelectedSeats}/>
+      <Header setSelectedSeats={setSelectedSeats} />
       <Routes>
-        <Route path="/" element={<MoviesPage  />} />
+        <Route path="/" element={<MoviesPage />} />
         <Route path="/sessoes/:idFilme" element={<MoviesSchedulePage
           selectedTime={selectedTime}
           SetSelectedTime={SetSelectedTime}
           filme={filme}
           setFilme={setFilme}
-          
+
 
         />} />
         <Route path="/assentos/:idSessao" element={<MovieSeatsPage
@@ -49,7 +44,7 @@ function App() {
           film={film} />} />
       </Routes>
 
-          <Footer film={film} filme={filme} selectedTime={selectedTime}/>
+      <Footer film={film} filme={filme} selectedTime={selectedTime} />
     </BrowserRouter>
 
 
