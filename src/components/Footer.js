@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 export default function Footer({ filme, film, selectedTime }) {
     const location = useLocation()
-    console.log(location)
+    console.log(filme)
     console.log(film)
 
     return (
@@ -17,7 +17,7 @@ export default function Footer({ filme, film, selectedTime }) {
                         <h1>{filme.title}</h1>
                     </div>
                 </Poster>
-                : (location.pathname).includes("/assentos") ?
+                : (location.pathname).includes("/assentos") && film ?
                     <Poster>
                         <div>
                             <img src={filme.posterURL} />

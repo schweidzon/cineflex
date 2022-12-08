@@ -9,6 +9,7 @@ export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelecte
     const { idSessao } = useParams()
     
     const [seatsId, setSeatsId] = useState([])
+    
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
@@ -35,8 +36,7 @@ export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelecte
             return a-b
         })
         setSelectedSeats(selectSeatsInOrder)
-        
-
+      
     }
 
     function reserveSeats() {
