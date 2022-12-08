@@ -23,8 +23,10 @@ const Film = styled.div`
     justify-content: center;
     align-items: center;
     padding: 8px;
-    margin-bottom: 11px;
+    margin-bottom: -23px;
+    
     cursor: pointer;
+  
    
         img {
             width: 129px;

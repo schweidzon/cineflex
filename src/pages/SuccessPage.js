@@ -9,7 +9,7 @@ export default function SuccessPage({selectedSeats, setSelectedSeats, film }) {
                 <div>
                     <h2>Filme e sessão</h2>
                     <p>{film.movie.title}</p>
-                    <p>{`${film.day.weekday} - ${film.name}`}</p>
+                    <p>{`${film.day.date}  ${film.name}`}</p>
                 </div>
                 <div>
                     <h2>Ingressos</h2>
@@ -30,7 +30,7 @@ export default function SuccessPage({selectedSeats, setSelectedSeats, film }) {
 }
 
 const SuccesStyle = styled.div`
-    width: 200px;
+    width: 210px;
     display: flex;
     flex-direction: column;
     

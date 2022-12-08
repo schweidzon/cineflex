@@ -27,9 +27,10 @@ export default function MoviesContainer() {
 const MoviePage = styled.div`
     display: flex;
     margin: auto;
-    justify-content: flex-start;
-    margin-left: 0.8em;
-    gap: 30px;
+    justify-content:center;
     flex-wrap: wrap;
-    padding: 25px;
+    gap: 38px;
+    margin-bottom: 20px;
+    
+   
 `
