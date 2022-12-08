@@ -1,11 +1,15 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Movie({ film }) {
-
+export default function Movie({ movie , setPage}) {
+    
     return (
-        <Film>
-            <img src={film.posterURL} />
-        </Film>
+        <Link to={`/sessoes/${movie.id}`}>
+            <Film>
+                <img onClick={() => setPage("/sessoes")} src={movie.posterURL} />
+            </Film>
+        </Link>
+
     )
 }
 

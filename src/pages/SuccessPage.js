@@ -1,38 +1,45 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SuccessPage() {
+export default function SuccessPage({ setPage, selectedSeats, setSelectedSeats, film }) {
+   
     return (
         <>
-         <SuccesStyle>
-            <div>
-                <h2>Filme e sessão</h2>
-                <p>Enola Holmes</p>
-                <p>24/06/2021 15:00</p>
-            </div>
-            <div>
-                <h2>Ingressos</h2>
-                <p>Assento 15</p>
-                <p>Assento 10</p>
-            </div>
-            <div>
-                <h2>Comprador</h2>
-                <p>Nome: Nome da pessoa</p>
-                <p>CPF: cpf da pessoa</p>
-            </div>
-        </SuccesStyle>
-            <HomeButton>Voltar para home</HomeButton></>
-       
+            <SuccesStyle>
+                <div>
+                    <h2>Filme e sessão</h2>
+                    <p>{film.movie.title}</p>
+                    <p>{`${film.day.weekday} - ${film.name}`}</p>
+                </div>
+                <div>
+                    <h2>Ingressos</h2>
+                    {selectedSeats.map((s) => <p>{`Assento ${s}`}</p>)}
+                </div>
+                <div>
+                    <h2>Comprador</h2>
+                    <p>Nome: Nome da pessoa</p>
+                    <p>CPF: cpf da pessoa</p>
+                </div>
+            </SuccesStyle>
+            <Link to="/">
+                <HomeButton onClick={() => {
+                    setPage("/")
+                    setSelectedSeats([])
+                }}>Voltar para home</HomeButton>
+            </Link>
+        </>
+
     )
 }
 
-const SuccesStyle = styled.div `
-    width: 375px;
+const SuccesStyle = styled.div`
+    width: 200px;
     display: flex;
     flex-direction: column;
+    
     gap: 35px;
     margin: auto;
-    margin-left: 45px;
-    margin-top:10px;
+   
         h2 {
             font-family: 'Roboto';
             font-style: normal;
@@ -49,6 +56,14 @@ const SuccesStyle = styled.div `
             color: #293845;
             margin-bottom: 5px;
         }
+    
+    @media(max-width: 500px) {
+        & {
+            margin-left: 45px;
+            margin-top:10px;
+            width: 375px;
+        }
+    }
        
 `
 

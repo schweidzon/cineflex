@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Movie from "./Movie";
+import Movie from "../components/Movie";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function MoviesContainer() {
+export default function MoviesContainer({setPage}) {
     const [movies, setMovies] = useState([])
     useEffect(() => {
         const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
@@ -16,7 +16,7 @@ export default function MoviesContainer() {
     if(movies) {
         return(
             <MoviePage>
-                {movies.map((film) =>  <Movie film={film} />)}
+                {movies.map((movie) =>  <Movie movie={movie} setPage={setPage}/>)}
             </MoviePage>
         )
     }
@@ -28,8 +28,8 @@ const MoviePage = styled.div`
     display: flex;
     margin: auto;
     justify-content: flex-start;
-    margin-left: 4em;
-    gap: 38px;
+    margin-left: 0.8em;
+    gap: 30px;
     flex-wrap: wrap;
     padding: 25px;
 `

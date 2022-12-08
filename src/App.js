@@ -1,40 +1,59 @@
 import Header from "./components/Header";
-import MoviesContainer from "./components/MoviesContainer";
+import MoviesPage from "./pages/MoviesPage";
 import GlobalStyle from "./style/globalStyle";
-import MoviesSchedule from "./components/MovieSchedule"
-import MovieSeatsPage from "./components/MovieSeatsPage";
+import MoviesSchedulePage from "./pages/MovieSchedulePage"
+import MovieSeatsPage from "./pages/MovieSeatsPage";
 import { useState } from "react";
-import Footer from "./components/Footer";
-import SuccessPage from "./components/SuccessPage";
+import SuccessPage from "./pages/SuccessPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
 
   const [selectedTime, SetSelectedTime] = useState([])
-  const [film, setFilm] = useState([])
   const [selectedSeats, setSelectedSeats] = useState([])
   const [buyerInfo, setBuyerInfo] = useState([])
-  
-  
-  
+  const [page, setPage] = useState('/')
+  const [film, setFilm] = useState(undefined)
+
+
+
+
+
   return (
-    <>
-      <GlobalStyle/>
-      <Header />
-      {/* <MoviesContainer/> */}
-      {/* <MoviesSchedule 
-      selectedTime={selectedTime}
-       SetSelectedTime={SetSelectedTime}
-        film={film}
-        /> */}
-      {/* <MovieSeatsPage 
-      selectedSeats={selectedSeats}
-       setSelectedSeats={setSelectedSeats} 
-       selectedTime={selectedTime} 
-       film={film} setFilm={setFilm} 
-       /> */}
-      <SuccessPage/>
-      <Footer poster={film.movie} selectedTime={selectedTime} />
-    </>
+
+    <BrowserRouter>
+      <GlobalStyle />
+      <Header page={page} setPage={setPage} setSelectedSeats={setSelectedSeats}/>
+      <Routes>
+        <Route path="/" element={<MoviesPage setPage={setPage} />} />
+        <Route path="/sessoes/:idFilme" element={<MoviesSchedulePage
+          selectedTime={selectedTime}
+          SetSelectedTime={SetSelectedTime}
+          setPage={setPage}
+
+        />} />
+        <Route path="/assentos/:idSessao" element={<MovieSeatsPage
+          selectedSeats={selectedSeats}
+          setSelectedSeats={setSelectedSeats}
+          selectedTime={selectedTime}
+          page={page}
+          setPage={setPage}
+          film={film}
+          setFilm={setFilm}
+
+
+
+        />} />
+        <Route path="/sucesso" element={<SuccessPage
+          setSelectedSeats={setSelectedSeats}
+          setPage={setPage}
+          selectedSeats={selectedSeats}
+          film={film} />} />
+      </Routes>
+
+
+    </BrowserRouter>
+
 
   );
 }

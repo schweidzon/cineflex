@@ -8,7 +8,7 @@ export default function MovieSeats({seats, selectedSeats, selectSeat}) {
     return ( 
         <>
           {seats.map((film) =>
-                    <Seat selectedSeats={selectedSeats.includes(film.name)} isAvailable={film.isAvailable} onClick={() => selectSeat(film)}>
+                    <Seat selectedSeats={selectedSeats.includes(film.name)} isAvailable={film.isAvailable} onClick={(e) => selectSeat(film)}>
                         {film.name}
                     </Seat>)}
                 <SeatsStatus>
