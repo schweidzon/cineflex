@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
-
+import arrow from "../images/arrow.png"
 export default function Header({ setSelectedSeats }) {
     const location = useLocation()
     console.log(location.pathname)
@@ -9,7 +9,7 @@ export default function Header({ setSelectedSeats }) {
     return (
         <>
             <HeaderStyle>
-                <button onClick={() => nav(-1)}>Voltar</button>
+                <img data-test="go-home-header-btn" onClick={() => nav(-1)} src={arrow}/>
                 <Link to="/">
                     <h1 onClick={() => setSelectedSeats([])}>CINEFLEX</h1>
                 </Link>
@@ -39,37 +39,15 @@ const HeaderStyle = styled.div`
             line-height: 40px;
             color:#E8833A;
         }   
-        button {
-            background-color: #dfe3e7;
-            border-radius: 8px;
-            border-style: none;
-            box-sizing: border-box;
-            color: #000000;
-            cursor: pointer;
-            display: inline-block;
-            font-family: 'Roboto';
-            font-size: 14px;
-            font-weight: 500;
-            height: 40px;
-            line-height: 20px;
-            list-style: none;
-            margin: 0;
-            outline: none;
-            padding: 10px 16px;
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            transition: color 100ms;
-            vertical-align: baseline;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation; 
+
+        img {
             position: absolute;
             left: 20px;
-             &:hover , &:focus {
-                background-color:#c0c9d1;
-             }
-         }
+            background-color: none;
+            cursor: pointer;
+
+        }
+      
         
         
         

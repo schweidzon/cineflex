@@ -5,7 +5,7 @@ export default function Movie({movie}) {
     
     return (
         <Link to={`/sessoes/${movie.id}`}>
-            <Film>
+            <Film data-test="movie">
                 <img src={movie.posterURL} />
             </Film>
         </Link>

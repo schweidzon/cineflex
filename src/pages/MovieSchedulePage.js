@@ -36,15 +36,14 @@ export default function MovieSchedulePage({ SetSelectedTime, filme, setFilme }) 
     return (
         <>
             {(schedule).map((days) =>
-                <MovieDays>
+                <MovieDays data-test="movie-day">
                     <h1>{days.weekday} - {days.date}</h1>
-
                     <MovieTimes>
                         <StyledLink to={`/assentos/${days.showtimes[0].id}`}>
-                            <button onClick={() => selectTime(days, "15:00")}>{days.showtimes[0].name}</button>
+                            <button data-test="showtime" onClick={() => selectTime(days, "15:00")}>{days.showtimes[0].name}</button>
                         </StyledLink>
                         <StyledLink to={`/assentos/${days.showtimes[1].id}`}>
-                            <button onClick={() => selectTime(days, "19:00")}>{days.showtimes[1].name}</button>
+                            <button data-test="showtime" onClick={() => selectTime(days, "19:00")}>{days.showtimes[1].name}</button>
                         </StyledLink>
                     </MovieTimes>
                 </MovieDays>

@@ -9,7 +9,7 @@ export default function Footer({ filme, film, selectedTime }) {
     return (
         <>
             {(location.pathname).includes("/sessoes") ?
-                <Poster>
+                <Poster data-test="footer">
                     <div>
                         <img src={filme.posterURL} />
                     </div>
@@ -18,7 +18,7 @@ export default function Footer({ filme, film, selectedTime }) {
                     </div>
                 </Poster>
                 : (location.pathname).includes("/assentos") && film ?
-                    <Poster>
+                    <Poster data-test="footer">
                         <div>
                             <img src={filme.posterURL} />
                         </div>

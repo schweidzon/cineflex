@@ -63,15 +63,15 @@ export default function MovieSeatsPage({ selectedTime, selectedSeats, setSelecte
                 <Inputs>
                     <div>
                         <p>Nome do comprador:</p>
-                        <input placeholder="Digite seu nome..." />
+                        <input data-test="client-name" placeholder="Digite seu nome..." />
                     </div>
                     <div>
                         <p>Nome do comprador:</p>
-                        <input placeholder="Digite seu nome..." />
+                        <input data-test="client-cpf" placeholder="Digite seu nome..." />
                     </div>
                 </Inputs>
                 <StyledLink to={selectedSeats.length > 0 && "/sucesso"}>
-                    <ReserveSeats onClick={reserveSeats}>Reservar assento(s)</ReserveSeats>
+                    <ReserveSeats data-test="book-seat-btn" onClick={reserveSeats}>Reservar assento(s)</ReserveSeats>
                 </StyledLink>
             
 

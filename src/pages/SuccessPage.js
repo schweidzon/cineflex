@@ -6,23 +6,23 @@ export default function SuccessPage({selectedSeats, setSelectedSeats, film }) {
     return (
         <>
             <SuccesStyle>
-                <div>
+                <div data-test="movie-info">
                     <h2>Filme e sessão</h2>
                     <p>{film.movie.title}</p>
                     <p>{`${film.day.date}  ${film.name}`}</p>
                 </div>
-                <div>
+                <div data-test="seats-info">
                     <h2>Ingressos</h2>
                     {selectedSeats.map((s) => <p>{`Assento ${s}`}</p>)}
                 </div>
-                <div>
+                <div data-test="client-info">
                     <h2>Comprador</h2>
                     <p>Nome: Nome da pessoa</p>
                     <p>CPF: cpf da pessoa</p>
                 </div>
             </SuccesStyle>
             <Link to="/">
-                <HomeButton onClick={() => setSelectedSeats([])}>Voltar para home</HomeButton>
+                <HomeButton data-test="go-home-btn" onClick={() => setSelectedSeats([])}>Voltar para home</HomeButton>
             </Link>
         </>
 
