@@ -1,10 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import arrow from "../images/arrow.png"
-export default function Header({ setSelectedSeats }) {
+export default function Header({ setSelectedSeats , setCompradores}) {
     const location = useLocation()
-    console.log(location.pathname)
+   // console.log(location.pathname)
     const nav = useNavigate()
+   
 
     return (
         <>
@@ -12,11 +13,18 @@ export default function Header({ setSelectedSeats }) {
                 {location.pathname !== "/" &&  <img data-test="go-home-header-btn" 
                 onClick={() => {
                     nav(-1)
+                    if(location.pathname === "/sucesso") {
+                        setCompradores([])
+                        setSelectedSeats([])
+                    }
                     setSelectedSeats([])
                 } } src={arrow} alt="go-back-button"/>}
                
                 <Link to="/">
-                    <h1 onClick={() => setSelectedSeats([])}>CINEFLEX</h1>
+                    <h1 onClick={() => {
+                        setSelectedSeats([])
+                        setCompradores([])
+                        }}>CINEFLEX</h1>
                 </Link>
             </HeaderStyle>
 

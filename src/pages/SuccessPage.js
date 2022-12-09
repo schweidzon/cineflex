@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SuccessPage({ selectedSeats, setSelectedSeats, film, name, cpf }) {
+export default function SuccessPage({ selectedSeats, setSelectedSeats, film, compradores,setCompradores }) {
 
     return (
         <>
@@ -16,13 +16,22 @@ export default function SuccessPage({ selectedSeats, setSelectedSeats, film, nam
                     {selectedSeats.map((s) => <p>{`Assento ${s}`}</p>)}
                 </div>
                 <div data-test="client-info">
-                    <h2>Comprador</h2>
-                    <p>Nome: {name}</p>
-                    <p>CPF: {cpf}</p>
+                    {compradores.length === 1 ? <h2>Comprador</h2> : <h2>Comprador(es)</h2>}
+                    {compradores.map((c) =>
+                        <BuyersInfo key={c.name}>
+                            <h1>Nome: {c.name}</h1>
+                            <p>CPF: {c.cpf}</p>
+                        </BuyersInfo>
+
+                    )}
+
                 </div>
             </SuccesStyle>
             <Link to="/">
-                <HomeButton data-test="go-home-btn" onClick={() => setSelectedSeats([])}>Voltar para home</HomeButton>
+                <HomeButton data-test="go-home-btn" onClick={() => {
+                    setSelectedSeats([])
+                    setCompradores([])
+                    }}>Voltar para home</HomeButton>
             </Link>
         </>
 
@@ -33,7 +42,6 @@ const SuccesStyle = styled.div`
     width: 210px;
     display: flex;
     flex-direction: column;
-    
     gap: 35px;
     margin: auto;
    
@@ -51,7 +59,7 @@ const SuccesStyle = styled.div`
             font-weight: 400;
             font-size: 22px;
             color: #293845;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
     
     @media(max-width: 500px) {
@@ -86,4 +94,20 @@ const HomeButton = styled.button`
             cursor: pointer;
           
         
+`
+
+const BuyersInfo = styled.div `
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 22px;
+            color: #293845;
+            margin-bottom: 10px;
+            h1 {
+                margin-bottom: 5px;
+            }
+            p {
+                margin-bottom: 25px;
+            }
+
 `

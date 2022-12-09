@@ -11,7 +11,7 @@ export default function MoviesContainer() {
         .catch(err => console.log(err.response.data))
 
     }, [])
-    console.log(movies)
+   // console.log(movies)
 
     if (movies.lenth === 0) {
         return (<div>Carregando...</div>)

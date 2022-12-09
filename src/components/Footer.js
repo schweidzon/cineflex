@@ -3,8 +3,8 @@ import styled from "styled-components"
 
 export default function Footer({ filme, film, selectedTime }) {
     const location = useLocation()
-    console.log(filme)
-    console.log(film)
+   // console.log(filme)
+   // console.log(film)
 
     return (
         <>
