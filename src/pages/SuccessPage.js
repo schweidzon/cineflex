@@ -12,7 +12,7 @@ export default function SuccessPage({ selectedSeats, setSelectedSeats, film, com
                     <p>{`${film.day.date}  ${film.name}`}</p>
                 </div>
                 <div data-test="seats-info">
-                    <h2>Ingressos</h2>
+                {compradores.length === 1 ? <h2>Ingresso</h2> : <h2>Ingressos</h2>}
                     {selectedSeats.map((s) => <p>{`Assento ${s}`}</p>)}
                 </div>
                 <div data-test="client-info">
