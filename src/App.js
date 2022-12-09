@@ -13,7 +13,7 @@ function App() {
   const [selectedSeats, setSelectedSeats] = useState([])
   const [filme, setFilme] = useState([])
   const [film, setFilm] = useState(undefined)
-  const [compradores, setCompradores] = useState([])
+  const [compradores, setCompradores] = useState([{ idAssentos:'' , name: '', cpf: '' }])
  
   
 
