@@ -11,9 +11,10 @@ function App() {
 
   const [selectedTime, SetSelectedTime] = useState([])
   const [selectedSeats, setSelectedSeats] = useState([])
-  const [buyerInfo, setBuyerInfo] = useState([])
   const [filme, setFilme] = useState([])
   const [film, setFilm] = useState(undefined)
+  const [name, setName] = useState("")
+  const [cpf, setCpf] = useState("")
 
   return (
 
@@ -36,12 +37,18 @@ function App() {
           selectedTime={selectedTime}
           film={film}
           setFilm={setFilm}
+          name={name}
+          setName={setName}
+          cpf={cpf}
+          setCpf={setCpf}
         />} />
 
         <Route path="/sucesso" element={<SuccessPage
           setSelectedSeats={setSelectedSeats}
           selectedSeats={selectedSeats}
-          film={film} />} />
+          film={film}
+          name={name}
+          cpf={cpf} />} />
       </Routes>
 
       <Footer film={film} filme={filme} selectedTime={selectedTime} />

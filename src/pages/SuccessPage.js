@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SuccessPage({ selectedSeats, setSelectedSeats, film }) {
+export default function SuccessPage({ selectedSeats, setSelectedSeats, film, name, cpf }) {
 
     return (
         <>
@@ -17,8 +17,8 @@ export default function SuccessPage({ selectedSeats, setSelectedSeats, film }) {
                 </div>
                 <div data-test="client-info">
                     <h2>Comprador</h2>
-                    <p>Nome: Nome da pessoa</p>
-                    <p>CPF: cpf da pessoa</p>
+                    <p>Nome: {name}</p>
+                    <p>CPF: {cpf}</p>
                 </div>
             </SuccesStyle>
             <Link to="/">

@@ -2,23 +2,26 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import MovieSeats from "../components/MovieSeats"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
-export default function MovieSeatsPage({selectedSeats, setSelectedSeats, film, setFilm }) {
+export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, setFilm, name, setName, cpf, setCpf }) {
 
     const { idSessao } = useParams()
-    
+    const navigate = useNavigate()
     const [seatsId, setSeatsId] = useState([])
-    
+
+    console.log(name)
+    console.log(cpf)
+
 
     useEffect(() => {
-        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)        
-        .then(resp => setFilm(resp.data))
-        .catch((err) => console.log(err.response.data))
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
+            .then(resp => setFilm(resp.data))
+            .catch((err) => console.log(err.response.data))
     }, [])
 
-   
- 
+
+
     function selectSeat(film) {
         console.log(film)
         if (!film.isAvailable) {
@@ -34,24 +37,36 @@ export default function MovieSeatsPage({selectedSeats, setSelectedSeats, film, s
         const seatsIds = [...seatsId, film.id]
         setSeatsId(seatsIds)
         console.log(selectSeats)
-        const selectSeatsInOrder = selectSeats.sort(function(a,b) {
-            return a-b
+        const selectSeatsInOrder = selectSeats.sort(function (a, b) {
+            return a - b
         })
         setSelectedSeats(selectSeatsInOrder)
-      
+
     }
 
-    function reserveSeats() {
-        if(selectedSeats.length === 0) {
+    function reserveSeats(e) {
+        e.preventDefault()
+        if (selectedSeats.length === 0) {
             alert('Selecione pelo menos uma cadeira')
             return
         }
-        const obj = { ids: seatsId, name: "Fulano", cpf: "12345678900" }
+
+        if (cpf.length !== 11) {
+            alert('Seu cpf deve ter 11 dígitos')
+            return
+        }
+
+        const obj = { ids: seatsId, name, cpf }
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj)
-        
+            .then(() => {
+                navigate("/sucesso")
+                console.log(obj)
+            })
+
     }
 
-    if(!film) {
+
+    if (!film) {
         return (<div>Carregando...</div>)
     }
 
@@ -66,20 +81,20 @@ export default function MovieSeatsPage({selectedSeats, setSelectedSeats, film, s
                 <FilmSeats>
                     <MovieSeats seats={film.seats} selectedSeats={selectedSeats} selectSeat={selectSeat} />
                 </FilmSeats>
-                <Inputs>
+                <InputsContainer onSubmit={reserveSeats}>
                     <div>
-                        <p>Nome do comprador:</p>
-                        <input data-test="client-name" placeholder="Digite seu nome..." />
+                        <label htmlFor="name">Nome do comprador:</label>
+                        <input onChange={(e) => setName(e.target.value)} id="name" data-test="client-name" placeholder="Digite seu nome..." />
                     </div>
                     <div>
-                        <p>Nome do comprador:</p>
-                        <input data-test="client-cpf" placeholder="Digite seu nome..." />
+                        <label htmlFor="cpf">Nome do comprador:</label>
+                        <input onChange={(e) => setCpf(e.target.value)} id="cpf" data-test="client-cpf" placeholder="Digite seu nome..." />
                     </div>
-                </Inputs>
-                <StyledLink to={selectedSeats.length > 0 && "/sucesso"}>
-                    <ReserveSeats data-test="book-seat-btn" onClick={reserveSeats}>Reservar assento(s)</ReserveSeats>
-                </StyledLink>
-            
+                </InputsContainer>
+
+                <ReserveSeats data-test="book-seat-btn" onClick={reserveSeats}>Reservar assento(s)</ReserveSeats>
+
+
 
 
             </>
@@ -104,7 +119,7 @@ margin: auto;
    
 
 `
- 
+
 const StyledLink = styled(Link)`
 text-decoration:none;`
 
@@ -114,7 +129,7 @@ text-decoration:none;`
 
 
 
-const Inputs = styled.div`
+const InputsContainer = styled.form`
     width: 375px;
     margin: auto;
     margin-top:50px;
