@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import MovieSeats from "../components/MovieSeats"
-import {  useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, setFilm, compradores, setCompradores }) {
 
@@ -23,7 +23,8 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
 
     function selectSeat(film, i) {
-       
+        console.log(compradores)
+
 
         if (!film.isAvailable) {
             alert("Esse assento não está disponível")
@@ -31,7 +32,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         }
 
         if (selectedSeats.includes(film.name)) {
-            if(window.confirm("Tem certeza que gostaria de remove o assento?")) {
+            if (window.confirm("Tem certeza que gostaria de remove o assento?")) {
                 setSelectedSeats(selectedSeats.filter(f => f !== film.name))
                 setCompradores(compradores.filter(c => c.idAssentos !== film.id))
                 return
@@ -40,17 +41,18 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
             }
 
         }
-        if(compradores.name === '') {
-           setCompradores([])
+        if (compradores.length === 1) {
+            let newBuyer = { idAssentos: film.id, name: '', cpf: '' }
+            setCompradores([newBuyer])
         }
-        
+
         let newBuyer = { idAssentos: film.id, name: '', cpf: '' }
         setCompradores([...compradores, newBuyer])
 
 
         const selectSeats = [...selectedSeats, film.name]
         const seatsIds = [...seatsId, film.id]
-        setSeatsId(seatsIds)       
+        setSeatsId(seatsIds)
         const selectSeatsInOrder = selectSeats.sort(function (a, b) {
             return a - b
         })
@@ -60,7 +62,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
     function reserveSeats(e) {
         e.preventDefault()
-       
+
         if (selectedSeats.length === 0) {
             alert('Selecione pelo menos uma cadeira')
             return
@@ -72,7 +74,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj)
             .then(() => {
                 navigate("/sucesso")
-               
+
             })
 
     }
@@ -102,38 +104,27 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                     <MovieSeats seats={film.seats} selectedSeats={selectedSeats} selectSeat={selectSeat} />
                 </FilmSeats>
                 <InputsContainer onSubmit={reserveSeats}>
-                    {selectedSeats.length === 0 ?
+
+
+
+
+                    {selectedSeats.map((item, i) =>
                         <>
-                            <div>
+                            <div key={item.id}>
                                 <label htmlFor="name">Nome do comprador:</label>
-                                <input value={compradores.name} required  onChange={(e) => handleInput(e, 0)} name={`name`}
+                                <input required value={item.name} onChange={(e) => handleInput(e, i)} name={`name`}
                                     type="text" data-test="client-name" placeholder="Digite seu nome..." />
                             </div>
                             <div>
-                                <label htmlFor="number">CPF do comprador:</label>
-                                <input value={compradores.cpf} required  type="number" onChange={(e) => handleInput(e, 0)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
+                                <label htmlFor="cpf">CPF do comprador:</label>
+                                <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
                             </div>
                         </>
 
-                        :
-                        <>
-                            {selectedSeats.map((item, i) =>
-                                <>
-                                    <div key={item.id}>
-                                        <label htmlFor="name">Nome do comprador:</label>
-                                        <input required value={item.name} onChange={(e) => handleInput(e, i)} name={`name`}
-                                            type="text" data-test="client-name" placeholder="Digite seu nome..." />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="cpf">CPF do comprador:</label>
-                                        <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
-                                    </div>
-                                </>
+
+                    )}
 
 
-                            )}
-                        </>
-                    }
 
                     {/* <div>
                         <label htmlFor="name">Nome do comprador:</label>
