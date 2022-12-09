@@ -102,12 +102,12 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                         <>
                             <div>
                                 <label htmlFor="name">Nome do comprador:</label>
-                                <input required  onChange={(e) => handleInput(e, 0)} name={`name`}
+                                <input value={compradores.name} required  onChange={(e) => handleInput(e, 0)} name={`name`}
                                     type="text" data-test="client-name" placeholder="Digite seu nome..." />
                             </div>
                             <div>
-                                <label htmlFor="cpf">CPF do comprador:</label>
-                                <input required  type="text" onChange={(e) => handleInput(e, 0)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
+                                <label htmlFor="number">CPF do comprador:</label>
+                                <input value={compradores.cpf} required  type="number" onChange={(e) => handleInput(e, 0)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
                             </div>
                         </>
 
@@ -122,7 +122,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                                     </div>
                                     <div>
                                         <label htmlFor="cpf">CPF do comprador:</label>
-                                        <input required value={item.cpf} type="text" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
+                                        <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
                                     </div>
                                 </>
 
