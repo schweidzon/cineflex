@@ -44,7 +44,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
         }
 
-        let newBuyer = { idAssentos: film.id, name: '', cpf: '' }
+        let newBuyer = { idAssentos: film.id, nome: '', cpf: '' }
         setCompradores([...compradores, newBuyer])
 
 
@@ -72,9 +72,8 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj)
             .then(() => {
                 navigate("/sucesso")
-
+                console.log(obj)
             })
-
     }
 
 
@@ -102,10 +101,6 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                     <MovieSeats seats={film.seats} selectedSeats={selectedSeats} selectSeat={selectSeat} />
                 </FilmSeats>
                 <InputsContainer onSubmit={reserveSeats}>
-
-
-
-
                     {compradores.map((item, i) =>
                         <>
                             <div key={item}>
@@ -118,22 +113,8 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                                 <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
                             </div>
                         </>
-
-
                     )}
-
-
-
-                    {/* <div>
-                        <label htmlFor="name">Nome do comprador:</label>
-                        <input onChange={(e) => setName(e.target.value)} id="name" data-test="client-name" placeholder="Digite seu nome..." />
-                    </div>
-                    <div>
-                        <label htmlFor="cpf">CPF do comprador:</label>
-                        <input onChange={(e) => setCpf(e.target.value)} id="cpf" data-test="client-cpf" placeholder="Digite seu nome..." />
-                    </div> */}
-
-                    <ReserveSeats data-test="book-seat-btn" >Reservar assento(s)</ReserveSeats>
+                    <ReserveSeats type="submit" data-test="book-seat-btn" >Reservar assento(s)</ReserveSeats>
                 </InputsContainer>
 
 
