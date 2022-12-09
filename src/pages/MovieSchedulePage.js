@@ -35,7 +35,7 @@ export default function MovieSchedulePage({ SetSelectedTime, setFilme }) {
                     <MovieTimes>
                         {days.showtimes.map((time) =>
                             <Link key={time.name} to={`/assentos/${time.id}`}>
-                                <button onClick={() => selectTime(time)}>{time.name}</button>
+                                <button data-test="showtime" onClick={() => selectTime(time)}>{time.name}</button>
                             </Link>
                         )}
                     </MovieTimes>
