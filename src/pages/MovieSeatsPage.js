@@ -34,8 +34,8 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         }
 
         if (selectedSeats.includes(film.name)) {
+            setSelectedSeats(selectedSeats.filter(f => f !== film.name))
             if (window.confirm("Tem certeza que gostaria de remove o assento?")) {
-                setSelectedSeats(selectedSeats.filter(f => f !== film.name))
                 setCompradores(compradores.filter(c => c.idAssento !== film.id))
                 console.log(compradores)
                 return
