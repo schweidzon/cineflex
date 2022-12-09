@@ -9,6 +9,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
     const { idSessao } = useParams()
     const navigate = useNavigate()
     const [seatsId, setSeatsId] = useState([])
+    
 
 
 
@@ -24,6 +25,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
     function selectSeat(film, i) {
         console.log(compradores)
+        console.log(selectedSeats)
 
 
         if (!film.isAvailable) {
@@ -104,16 +106,16 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
 
 
-                    {selectedSeats.map((item, i) =>
+                    {compradores.map((item, i) =>
                         <>
-                            <div key={item.name}>
+                            <div key={item}>
                                 <label htmlFor="name">Nome do comprador:</label>
                                 <input required value={item.name} onChange={(e) => handleInput(e, i)} name={`name`}
                                     type="text" data-test="client-name" placeholder="Digite seu nome..." />
                             </div>
                             <div>
                                 <label htmlFor="cpf">CPF do comprador:</label>
-                                <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
+                                <input required value={compradores.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
                             </div>
                         </>
 
