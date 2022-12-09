@@ -115,7 +115,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                             </div>
                             <div>
                                 <label htmlFor="cpf">CPF do comprador:</label>
-                                <input required value={compradores.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
+                                <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
                             </div>
                         </>
 
