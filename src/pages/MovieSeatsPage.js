@@ -41,10 +41,6 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
             }
 
         }
-        if (compradores.length === 1) {
-            let newBuyer = { idAssentos: film.id, name: '', cpf: '' }
-            setCompradores([newBuyer])
-        }
 
         let newBuyer = { idAssentos: film.id, name: '', cpf: '' }
         setCompradores([...compradores, newBuyer])
@@ -110,7 +106,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
                     {selectedSeats.map((item, i) =>
                         <>
-                            <div key={item.id}>
+                            <div key={item.name}>
                                 <label htmlFor="name">Nome do comprador:</label>
                                 <input required value={item.name} onChange={(e) => handleInput(e, i)} name={`name`}
                                     type="text" data-test="client-name" placeholder="Digite seu nome..." />
