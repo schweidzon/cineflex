@@ -44,7 +44,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
         }
 
-        let newBuyer = { idAssentos: film.id, nome: '', cpf: '' }
+        let newBuyer = { idAssento: film.id, nome: '', cpf: '' }
         setCompradores([...compradores, newBuyer])
 
 

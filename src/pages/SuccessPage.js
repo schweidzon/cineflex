@@ -18,8 +18,8 @@ export default function SuccessPage({ selectedSeats, setSelectedSeats, film, com
                 <div data-test="client-info">
                     {compradores.length === 1 ? <h2>Comprador(a)</h2> : <h2>Compradores</h2>}
                     {compradores.map((c) =>
-                        <BuyersInfo key={c.name}>
-                            <h1>Nome: {c.name}</h1>
+                        <BuyersInfo key={c.nome}>
+                            <h1>Nome: {c.nome}</h1>
                             <p>CPF: {c.cpf}</p>
                         </BuyersInfo>
 
