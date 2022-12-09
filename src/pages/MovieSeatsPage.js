@@ -106,12 +106,12 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                         <>
                             <div key={item}>
                                 <label htmlFor="name">Nome do comprador:</label>
-                                <input required value={item.nome} onChange={(e) => handleInput(e, i)} name={`nome`}
+                                <input required value={item.nome} onChange={(e) => handleInput(e, i)} name="nome"
                                     type="text" data-test="client-name" placeholder="Digite seu nome..." />
                             </div>
                             <div>
                                 <label htmlFor="cpf">CPF do comprador:</label>
-                                <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name={`cpf`} data-test="client-cpf" placeholder="Digite seu nome..." />
+                                <input required value={item.cpf} type="number" onChange={(e) => handleInput(e, i)} name="cpf" data-test="client-cpf" placeholder="Digite seu cpf..." />
                             </div>
                         </>
                     )}
