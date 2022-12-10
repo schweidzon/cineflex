@@ -9,7 +9,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
     const { idSessao } = useParams()
     const navigate = useNavigate()
     const [seatsId, setSeatsId] = useState([])
-
+    
 
 
 
@@ -34,12 +34,14 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         }
 
         if (selectedSeats.includes(film.name)) {
-            setSelectedSeats(selectedSeats.filter(f => f !== film.name))
-
-            setCompradores(compradores.filter(c => c.idAssento !== film.id))
-            console.log(compradores)
-            return
-
+            if (window.confirm("Tem certeza que gostaria de remove o assento?")) {
+                setSelectedSeats(selectedSeats.filter(f => f !== film.name))
+                setCompradores(compradores.filter(c => c.idAssento !== film.id))
+                console.log(compradores)
+                return
+            } else {
+                return
+            }
 
         }
 
