@@ -63,7 +63,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         e.preventDefault()
 
         if (selectedSeats.length === 0) {
-            alert('Selecione pelo menos uma cadeira')
+            alert('Selecione pelo menos um assento')
             return
         }
 
@@ -197,7 +197,7 @@ const ReserveSeats = styled.button`
     align-items: center;
     margin: auto;   
     margin-top: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 100px;
     cursor: pointer;
 `
 

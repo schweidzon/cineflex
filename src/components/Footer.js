@@ -43,6 +43,8 @@ const Poster = styled.div`
     background: #DFE6ED;
     border-top: 1px solid #9EADBA;
     gap: 10px;
+    margin-top: 50px;
+   
         div:first-of-type {
             width: 64px;
             height: 89px;
