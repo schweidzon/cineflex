@@ -11,24 +11,24 @@ function App() {
 
   const [selectedTime, SetSelectedTime] = useState([])
   const [selectedSeats, setSelectedSeats] = useState([])
-  const [filme, setFilme] = useState([])
+  const [selectedFilm, setSelectedFilm] = useState([])
   const [film, setFilm] = useState(undefined)
-  const [compradores, setCompradores] = useState([])
- 
-  
+  const [buyers, setBuyers] = useState([])
+
+
 
   return (
 
     <BrowserRouter>
       <GlobalStyle />
-      <Header setSelectedSeats={setSelectedSeats} setCompradores={setCompradores} />
+      <Header setSelectedSeats={setSelectedSeats} setBuyers={setBuyers} />
       <Routes>
         <Route path="/" element={<MoviesPage />} />
         <Route path="/sessoes/:idFilme" element={<MoviesSchedulePage
           selectedTime={selectedTime}
           SetSelectedTime={SetSelectedTime}
-          filme={filme}
-          setFilme={setFilme}
+          selectedFilm={selectedFilm}
+          setSelectedFilm={setSelectedFilm}
 
 
         />} />
@@ -38,26 +38,21 @@ function App() {
           selectedTime={selectedTime}
           film={film}
           setFilm={setFilm}
-      
-     
-      
-          compradores={compradores}
-          setCompradores={setCompradores}
-          
+          buyers={buyers}
+          setBuyers={setBuyers}
+
         />} />
 
         <Route path="/sucesso" element={<SuccessPage
           setSelectedSeats={setSelectedSeats}
           selectedSeats={selectedSeats}
           film={film}
-        
-   
-          compradores={compradores} 
-          setCompradores={setCompradores}
-          />} />
+          buyers={buyers}
+          setBuyers={setBuyers}
+        />} />
       </Routes>
 
-      <Footer film={film} filme={filme} selectedTime={selectedTime} />
+      <Footer film={film} selectedFilm={selectedFilm} selectedTime={selectedTime} />
     </BrowserRouter>
 
 

@@ -4,12 +4,12 @@ import styled from "styled-components"
 import MovieSeats from "../components/MovieSeats"
 import { useNavigate, useParams } from "react-router-dom"
 
-export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, setFilm, compradores, setCompradores }) {
+export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, setFilm, buyers, setBuyers }) {
 
     const { idSessao } = useParams()
     const navigate = useNavigate()
     const [seatsId, setSeatsId] = useState([])
-    
+
 
 
 
@@ -24,7 +24,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
 
     function selectSeat(film, i) {
-        console.log(compradores)
+        console.log(buyers)
         console.log(selectedSeats)
 
 
@@ -36,8 +36,8 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         if (selectedSeats.includes(film.name)) {
             if (window.confirm("Tem certeza que gostaria de remove o assento?")) {
                 setSelectedSeats(selectedSeats.filter(f => f !== film.name))
-                setCompradores(compradores.filter(c => c.idAssento !== film.id))
-                console.log(compradores)
+                setBuyers(buyers.filter(c => c.idAssento !== film.id))
+                console.log(buyers)
                 return
             } else {
                 return
@@ -46,7 +46,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
         }
 
         let newBuyer = { idAssento: film.id, nome: '', cpf: '' }
-        setCompradores([...compradores, newBuyer])
+        setBuyers([...buyers, newBuyer])
 
 
         const selectSeats = [...selectedSeats, film.name]
@@ -69,7 +69,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
 
 
-        const obj = { ids: seatsId, compradores: compradores }
+        const obj = { ids: seatsId, compradores: buyers }
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj)
             .then(() => {
                 navigate("/sucesso")
@@ -84,9 +84,9 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
 
     const handleInput = (e, i) => {
         const { name, value } = e.target
-        let novosCompradores = [...compradores]
-        novosCompradores[i][name] = value
-        setCompradores(novosCompradores)
+        let newBuyers = [...buyers]
+        newBuyers[i][name] = value
+        setBuyers(newBuyers)
 
     }
 
@@ -102,7 +102,7 @@ export default function MovieSeatsPage({ selectedSeats, setSelectedSeats, film, 
                     <MovieSeats seats={film.seats} selectedSeats={selectedSeats} selectSeat={selectSeat} />
                 </FilmSeats>
                 <InputsContainer onSubmit={reserveSeats}>
-                    {compradores.map((item, i) =>
+                    {buyers.map((item, i) =>
                         <>
                             <div key={item}>
                                 <label htmlFor="name">Nome do comprador:</label>

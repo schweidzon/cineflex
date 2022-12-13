@@ -1,29 +1,29 @@
 import { useLocation } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Footer({ filme, film, selectedTime }) {
+export default function Footer({ selectedFilm, film, selectedTime }) {
     const location = useLocation()
-   // console.log(filme)
-   // console.log(film)
+    // console.log(selectedFilm)
+    // console.log(film)
 
     return (
         <>
             {(location.pathname).includes("/sessoes") ?
                 <Poster data-test="footer">
                     <div>
-                        <img src={filme.posterURL} />
+                        <img src={selectedFilm.posterURL} alt="film-poster"/>
                     </div>
                     <div>
-                        <h1>{filme.title}</h1>
+                        <h1>{selectedFilm.title}</h1>
                     </div>
                 </Poster>
                 : (location.pathname).includes("/assentos") && film ?
                     <Poster data-test="footer">
                         <div>
-                            <img src={filme.posterURL} />
+                            <img src={selectedFilm.posterURL} alt="film-poster" />
                         </div>
                         <div>
-                            <h1>{filme.title}</h1>
+                            <h1>{selectedFilm.title}</h1>
                             <h2>{film.day.weekday} - {film.name}</h2>
                         </div>
                     </Poster> : ""}

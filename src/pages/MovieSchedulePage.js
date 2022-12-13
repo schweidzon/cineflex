@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 
 
-export default function MovieSchedulePage({ SetSelectedTime, setFilme }) {
+export default function MovieSchedulePage({ SetSelectedTime, setSelectedFilm }) {
     const { idFilme } = useParams()
     const [schedule, setSchedule] = useState([])
 
@@ -13,10 +13,10 @@ export default function MovieSchedulePage({ SetSelectedTime, setFilme }) {
         axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
             .then(resp => {
                 setSchedule(resp.data.days)
-                setFilme(resp.data)
+                setSelectedFilm(resp.data)
             })
             .catch((err) => console.log(err.response.data))
-          // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

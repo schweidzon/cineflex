@@ -1,30 +1,32 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import arrow from "../images/arrow.png"
-export default function Header({ setSelectedSeats , setCompradores}) {
+export default function Header({ setSelectedSeats, setBuyers }) {
     const location = useLocation()
-   // console.log(location.pathname)
+    // console.log(location.pathname)
     const nav = useNavigate()
-   
+
 
     return (
         <>
             <HeaderStyle>
-                {location.pathname !== "/" &&  <img data-test="go-home-header-btn" 
-                onClick={() => {
-                    nav(-1)
-                    if(location.pathname === "/sucesso") {
-                        setCompradores([])
+                {location.pathname !== "/" && <img data-test="go-home-header-btn"
+                    onClick={() => {
+                        nav(-1)
+                        if (location.pathname === "/sucesso") {
+                            setBuyers([])
+                            setSelectedSeats([])
+                        }
                         setSelectedSeats([])
-                    }
-                    setSelectedSeats([])
-                } } src={arrow} alt="go-back-button"/>}
-               
+                    }} src={arrow} 
+                    alt="go-back-button" 
+                    />}
+
                 <Link to="/">
                     <h1 onClick={() => {
                         setSelectedSeats([])
-                        setCompradores([])
-                        }}>CINEFLEX</h1>
+                        setBuyers([])
+                    }}>CINEFLEX</h1>
                 </Link>
             </HeaderStyle>
 
@@ -64,14 +66,6 @@ const HeaderStyle = styled.div`
         
         
         
-`
-
-
-
-
-const backButton = styled.button`
-    position: absolute;
-    top: 20px;
 `
 
 const PageTitle = styled.div`

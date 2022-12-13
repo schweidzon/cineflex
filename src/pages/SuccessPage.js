@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SuccessPage({ selectedSeats, setSelectedSeats, film, compradores,setCompradores }) {
+export default function SuccessPage({ selectedSeats, setSelectedSeats, film, buyers, setBuyers }) {
 
     return (
         <>
@@ -12,12 +12,12 @@ export default function SuccessPage({ selectedSeats, setSelectedSeats, film, com
                     <p>{`${film.day.date}  ${film.name}`}</p>
                 </div>
                 <div data-test="seats-info">
-                {compradores.length === 1 ? <h2>Ingresso</h2> : <h2>Ingressos</h2>}
+                    {buyers.length === 1 ? <h2>Ingresso</h2> : <h2>Ingressos</h2>}
                     {selectedSeats.map((s) => <p>{`Assento ${s}`}</p>)}
                 </div>
                 <div data-test="client-info">
-                    {compradores.length === 1 ? <h2>Comprador(a)</h2> : <h2>Compradores</h2>}
-                    {compradores.map((c) =>
+                    {buyers.length === 1 ? <h2>Comprador(a)</h2> : <h2>Compradores</h2>}
+                    {buyers.map((c) =>
                         <BuyersInfo key={c.nome}>
                             <h1>Nome: {c.nome}</h1>
                             <p>CPF: {c.cpf}</p>
@@ -30,8 +30,8 @@ export default function SuccessPage({ selectedSeats, setSelectedSeats, film, com
             <Link to="/">
                 <HomeButton data-test="go-home-btn" onClick={() => {
                     setSelectedSeats([])
-                    setCompradores([])
-                    }}>Voltar para home</HomeButton>
+                    setBuyers([])
+                }}>Voltar para home</HomeButton>
             </Link>
         </>
 
@@ -96,7 +96,7 @@ const HomeButton = styled.button`
         
 `
 
-const BuyersInfo = styled.div `
+const BuyersInfo = styled.div`
             font-family: 'Roboto';
             font-style: normal;
             font-weight: 400;
