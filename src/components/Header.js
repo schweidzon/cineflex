@@ -16,6 +16,9 @@ export default function Header({ setSelectedSeats, setBuyers }) {
                         if (location.pathname === "/sucesso") {
                             setBuyers([])
                             setSelectedSeats([])
+                        } else if((location.pathname).includes("/assentos") ) {
+                            setBuyers([])
+                            setSelectedSeats([])
                         }
                         setSelectedSeats([])
                     }} src={arrow} 
