@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 
 
-export default function MovieSchedulePage({ SetSelectedTime, setSelectedFilm }) {
+export default function MovieSchedulePage({setSelectedFilm }) {
     const { idFilme } = useParams()
     const [schedule, setSchedule] = useState([])
 
@@ -23,10 +23,7 @@ export default function MovieSchedulePage({ SetSelectedTime, setSelectedFilm }) 
     if (schedule.length === 0) {
         return (<div>Carregando...</div>)
     }
-    function selectTime(time) {
-        const times = { day: time.weekday, time: time.name }
-        SetSelectedTime(times)
-    }
+  
     return (
         <>
             {(schedule).map((days) =>
@@ -35,7 +32,7 @@ export default function MovieSchedulePage({ SetSelectedTime, setSelectedFilm }) 
                     <MovieTimes>
                         {days.showtimes.map((time) =>
                             <Link key={time.name} to={`/assentos/${time.id}`}>
-                                <button data-test="showtime" onClick={() => selectTime(time)}>{time.name}</button>
+                                <button data-test="showtime" >{time.name}</button>
                             </Link>
                         )}
                     </MovieTimes>

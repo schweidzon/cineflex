@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Footer from "./components/Footer";
 function App() {
 
-  const [selectedTime, SetSelectedTime] = useState([])
+  
   const [selectedSeats, setSelectedSeats] = useState([])
   const [selectedFilm, setSelectedFilm] = useState([])
   const [film, setFilm] = useState(undefined)
@@ -25,8 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MoviesPage />} />
         <Route path="/sessoes/:idFilme" element={<MoviesSchedulePage
-          selectedTime={selectedTime}
-          SetSelectedTime={SetSelectedTime}
+      
           selectedFilm={selectedFilm}
           setSelectedFilm={setSelectedFilm}
 
@@ -35,7 +34,7 @@ function App() {
         <Route path="/assentos/:idSessao" element={<MovieSeatsPage
           selectedSeats={selectedSeats}
           setSelectedSeats={setSelectedSeats}
-          selectedTime={selectedTime}
+          
           film={film}
           setFilm={setFilm}
           buyers={buyers}
@@ -52,7 +51,7 @@ function App() {
         />} />
       </Routes>
 
-      <Footer film={film} selectedFilm={selectedFilm} selectedTime={selectedTime} />
+      <Footer film={film} selectedFilm={selectedFilm} />
     </BrowserRouter>
 
 

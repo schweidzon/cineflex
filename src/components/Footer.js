@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Footer({ selectedFilm, film, selectedTime }) {
+export default function Footer({ selectedFilm, film }) {
     const location = useLocation()
     // console.log(selectedFilm)
     // console.log(film)
